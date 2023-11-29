@@ -5,7 +5,6 @@ from rl_model import RPSModel
 import numpy as np
 from q_train import QAgent
 
-# 创建环境
 env = RockPaperScissorsEnv()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -32,12 +31,12 @@ def print_game_result(human_action, agent_action):
         print("You lose!")
 
 state1, state2 = env.reset()
-agent1 = agents[0]  # 假设agent1是模型代理
+agent1 = agents[0]
 player_win_count = 0
 
 while True:
     action1 = agent1.select_action(state1)
-    action2 = get_human_action()  # 从人类玩家获取动作
+    action2 = get_human_action()
 
     if action2 == 'exit': break
 
@@ -47,11 +46,9 @@ while True:
 
     print_game_result(action2, action1)
 
-    # 以下为训练agent1的代码
     agent1.train(state1, action1, reward1, next_state1, done)
     state1 = next_state1
 
-    # 更新胜利和游戏次数
     if reward1 > 0:
         agent1.win_count += 1
         if agent1.epsilon > 0:
