@@ -1,4 +1,4 @@
-# RockPaperScissorRL
+# RockPaperScissorsRL
 
 ## Description
 
