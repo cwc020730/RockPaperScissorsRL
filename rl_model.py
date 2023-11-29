@@ -6,7 +6,6 @@ class RPSModel(nn.Module):
     def __init__(self):
         super(RPSModel, self).__init__()
         self.relu = nn.ReLU()
-        # Define the architecture of the network
         self.fc1 = nn.Linear(5, 32)
         self.fc2 = nn.Linear(32, 64)
         self.fc3 = nn.Linear(64, 32)
