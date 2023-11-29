@@ -6,9 +6,22 @@ This project contains an algorithm for the simple game Rock Paper Scissors. The 
 
 ## Dependencies
 
+This program is written in Python 3.8.5.
+
 |Dependency|Version|
 |-|-|
 |gym|0.26.2|
 |torch|2.1.0|
 
 ## Run the program
+
+Run the following command if the libraries are not downloaded:
+```
+pip install gym
+pip install torch
+```
+
+Run the following command to play the game:
+```
+python q_train_human_assist.py
+```
