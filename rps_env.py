@@ -14,13 +14,15 @@ class RockPaperScissorsEnv(gym.Env):
         self.action_space = spaces.Discrete(3)
         # Observation space is actually not used in this game, but defined for compatibility
         self.observation_space = spaces.Discrete(1)
+        self.state1, self.state2 = np.zeros(5), np.zeros(5)
 
     def reset(self):
         """
         Reset the state of the environment to an initial state.
         """
         # In this game, the reset state does not have any meaningful information
-        return np.zeros(6)
+        self.state1, self.state2 = np.zeros(5), np.zeros(5)
+        return self.state1, self.state2
 
     def step(self, action1, action2):
         """
@@ -28,19 +30,22 @@ class RockPaperScissorsEnv(gym.Env):
         """
         # Determine the winner
         if action1 == action2:
-            reward = 0  # Tie
+            reward1, reward2 = 0, 0  # Tie
         elif (action1 == 0 and action2 == 2) or (action1 == 1 and action2 == 0) or (action1 == 2 and action2 == 1):
-            reward = 1  # Agent 1 wins
+            reward1, reward2 = 1, -1  # Agent 1 wins
         else:
-            reward = -1  # Agent 2 wins
+            reward1, reward2 = -1, 1  # Agent 2 wins
         
-        new_state = np.zeros(6)
-        new_state[action1] = 1
-        new_state[3 + action2] = 1
+        # 更新状态
+        # 假设我们只保留过去5轮对手的动作
+        self.state1 = np.roll(self.state1, -1)
+        self.state1[-1] = action2  # 只记录代理2的动作
 
+        self.state2 = np.roll(self.state2, -1)
+        self.state2[-1] = action1  # 只记录代理1的动作
 
         # State, reward, done, info
-        return new_state, reward, True, {}
+        return self.state1, self.state2, reward1, reward2, True, {}
 
     def render(self, mode='human'):
         pass
