@@ -3,7 +3,7 @@ import torch.nn.functional as F
 from rps_env import RockPaperScissorsEnv
 from rl_model import RPSModel
 import numpy as np
-from q_train import QAgent
+from q_agent import QAgent
 
 env = RockPaperScissorsEnv()
 
