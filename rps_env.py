@@ -36,10 +36,5 @@ class RockPaperScissorsEnv(gym.Env):
         pass
 
 if __name__ == '__main__':
-    env = RockPaperScissorsEnv()
-    env.reset()
-
-    action1, action2 = 0, 1
-    state, reward, done, info = env.step(action1, action2)
-    print(state, reward, done, info)
+    pass
 
